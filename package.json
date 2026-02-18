@@ -26,6 +26,7 @@
     "@angular-devkit/build-angular": "^19.2.20",
     "@angular/cli": "^19.2.20",
     "@angular/compiler-cli": "^19.2.18",
+    "@testing-library/angular": "^17.4.0",
     "@types/jasmine": "~5.1.0",
     "@vitest/ui": "^4.0.18",
     "jasmine-core": "~5.2.0",
