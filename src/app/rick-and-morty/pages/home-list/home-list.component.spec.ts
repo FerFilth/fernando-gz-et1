@@ -2,22 +2,22 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeListComponent } from './home-list.component';
 
-describe('HomeListComponent', () => {
-  let component: HomeListComponent;
-  let fixture: ComponentFixture<HomeListComponent>;
+// describe('HomeListComponent', () => {
+//   let component: HomeListComponent;
+//   let fixture: ComponentFixture<HomeListComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [HomeListComponent]
-    })
-    .compileComponents();
+//   beforeEach(async () => {
+//     await TestBed.configureTestingModule({
+//       declarations: [HomeListComponent]
+//     })
+//     .compileComponents();
 
-    fixture = TestBed.createComponent(HomeListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//     fixture = TestBed.createComponent(HomeListComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

@@ -1,8 +1,13 @@
-<div class="w-100">
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1"
+      ><span class="material-symbols-outlined"> search </span></span
+    >
+  </div>
   <input
     type="text"
-    class="form-control w-100"
-    id="exampleFormControlInput1"
+    class="form-control-custom w-100"
+    id="searchInput"
     placeholder="Busca un personaje"
     (keyup.enter)="search(inputRAM.value)"
     #inputRAM

@@ -1,19 +1,28 @@
 <div class="container grid-home-page">
   <div class="row">
-    <div class="col-12 col-md-6">
-      <h1 class="mb-3">Wubba lubba dub dub!</h1>
-      <p class="mb-3">Base de datos de personajes de Rick y Morty</p>
+    <div class="col-12">
+      <h1 class="text-center mb-3">Wubba lubba dub dub!</h1>
+      <p class="mb-3 text-center">
+        Base de datos de personajes de Rick y Morty
+      </p>
     </div>
   </div>
   <div class="grid-content">
     <div class="action-bar">
       <app-ram-input (item)="onSearch($event)"></app-ram-input>
-      <div class="d-flex align-items-center justify-content-end">
-        <span>Mis favoritos</span>
+      <div class="d-flex align-items-center justify-content-end gap-1">
+        <span
+          class=""
+          [style]="
+            'font-weight: 600;
+         '
+          "
+          >Mis favoritos</span
+        >
         <button
-          class="btn d-flex align-items-center px-1 py-1 ms-2 favorite-button"
-          [class.btn-primary]="showOnlyFavorites"
-          [class.btn-outline-secondary]="!showOnlyFavorites"
+          class="favorite-button"
+          [class.favorite-active]="showOnlyFavorites"
+          [class.favorite-inactive]="!showOnlyFavorites"
           [class.is-active]="showOnlyFavorites"
           (click)="toggleFavorite()"
         >
