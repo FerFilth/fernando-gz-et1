@@ -1,0 +1,22 @@
+.favorite-button {
+  transition: all 0.2s ease;
+
+  .favorite-icon {
+    cursor: pointer;
+    user-select: none;
+    color: #6c757d;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    transition: all 0.2s ease;
+  }
+
+  // Cuando está activo
+  &.is-active .favorite-icon {
+    color: #ffc107;
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+
+  // En hover siempre sin relleno
+  &:hover .favorite-icon {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+}

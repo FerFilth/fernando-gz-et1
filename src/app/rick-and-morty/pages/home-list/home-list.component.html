@@ -6,20 +6,50 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-12 mb-3">
+    <div class="col-12 col-md-8 mb-3">
       <app-ram-input (item)="onSearch($event)"></app-ram-input>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <div class="vh-100 overflow-auto px-2">
-        <app-ram-grid [characters]="characters"></app-ram-grid>
+    <div
+      class="col-12 col-md-4 mb-3 d-flex align-items-center justify-content-end"
+    >
+      <span>Mis favoritos</span>
+      <button
+        class="btn d-flex align-items-center px-1 py-1 ms-2 favorite-button"
+        [class.btn-primary]="showOnlyFavorites"
+        [class.btn-outline-secondary]="!showOnlyFavorites"
+        [class.is-active]="showOnlyFavorites"
+        (click)="toggleFavorite()"
+      >
+        <span class="material-symbols-outlined favorite-icon">
+          star
+        </span>
+      </button>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="vh-100 overflow-auto px-2">
+          <div
+            *ngIf="showOnlyFavorites && characters.length === 0"
+            class="alert alert-info text-center mt-4"
+          >
+            <span
+              class="material-symbols-outlined fs-1 d-block mb-2"
+              style="font-variation-settings: 'FILL' 0"
+              >star</span
+            >
+            <p class="mb-0">
+              No tienes personajes favoritos aún. ¡Empieza a marcar tus
+              favoritos!
+            </p>
+          </div>
+          <app-ram-grid [characters]="characters"></app-ram-grid>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="row mt-3">
-    <div class="col-12">
-      <app-paginator></app-paginator>
+    <div class="row mt-3">
+      <div class="col-12">
+        <app-paginator></app-paginator>
+      </div>
     </div>
   </div>
 </div>

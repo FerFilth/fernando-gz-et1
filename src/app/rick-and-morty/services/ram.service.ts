@@ -23,6 +23,12 @@ export class RamService {
   public search$ = this.searchSubject.asObservable();
   public collectionSize$ = this.collectionSizeSubject.asObservable();
 
+  private readonly FAVORITES_KEY = 'ram-favorites';
+  private favoritesSubject = new BehaviorSubject<Set<number>>(
+    this.loadFavorites(),
+  );
+  public favorites$ = this.favoritesSubject.asObservable();
+
   constructor(private http: HttpClient) {}
 
   getCharacters(
@@ -43,13 +49,15 @@ export class RamService {
   getCharactersCombined(): Observable<RamResponse | null> {
     return combineLatest([this.page$, this.search$]).pipe(
       switchMap(([page, name]) =>
-        this.getCharacters(page, name).pipe(tap((response) => {
-          if (response && response.info) {
-            this.collectionSizeSubject.next(response.info.count);
-          } else {
-            this.collectionSizeSubject.next(0);
-          }
-        })),
+        this.getCharacters(page, name).pipe(
+          tap((response) => {
+            if (response && response.info) {
+              this.collectionSizeSubject.next(response.info.count);
+            } else {
+              this.collectionSizeSubject.next(0);
+            }
+          }),
+        ),
       ),
     );
   }
@@ -63,4 +71,34 @@ export class RamService {
     this.pageSubject.next(1);
     this.searchSubject.next(search);
   }
+
+  //#region FAVORITOS
+  private loadFavorites(): Set<number> {
+    const stored = localStorage.getItem(this.FAVORITES_KEY);
+    return stored ? new Set(JSON.parse(stored)) : new Set();
+  }
+
+  private saveFavorites(favorites: Set<number>): void {
+    localStorage.setItem(this.FAVORITES_KEY, JSON.stringify([...favorites]));
+    this.favoritesSubject.next(favorites);
+  }
+
+  toggleFavorite(characterId: number): void {
+    const favorites = new Set(this.favoritesSubject.value);
+    if (favorites.has(characterId)) {
+      favorites.delete(characterId);
+    } else {
+      favorites.add(characterId);
+    }
+    this.saveFavorites(favorites);
+  }
+
+  isFavorite(characterId: number): boolean {
+    return this.favoritesSubject.value.has(characterId);
+  }
+
+  getFavorites(): number[] {
+    return [...this.favoritesSubject.value];
+  }
+  //#endregion FAVORITOS
 }

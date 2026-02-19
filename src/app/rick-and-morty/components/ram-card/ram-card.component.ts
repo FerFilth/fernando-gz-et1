@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RamCharacter } from '../../models/ram.interface';
+import { RamService } from '../../services/ram.service';
 
 @Component({
   selector: 'app-ram-card',
@@ -7,10 +8,18 @@ import { RamCharacter } from '../../models/ram.interface';
   templateUrl: './ram-card.component.html',
   styleUrl: './ram-card.component.scss',
 })
-export class RamCardComponent {
+export class RamCardComponent implements OnInit {
   @Input() character: RamCharacter | null = null;
   public hasLoaded = false;
   public isFavorite = false;
+
+  constructor(private ramService: RamService) {}
+
+  ngOnInit() {
+    if (this.character) {
+      this.isFavorite = this.ramService.isFavorite(this.character.id);
+    }
+  }
 
   getImage()  {
     return this.character?.image;
@@ -21,7 +30,10 @@ export class RamCardComponent {
     }
 
   toggleFavorite() {
-    this.isFavorite = !this.isFavorite;
+    if (this.character) {
+      this.ramService.toggleFavorite(this.character.id);
+      this.isFavorite = !this.isFavorite;
+    }
   }
 
   getIconStyle() {
