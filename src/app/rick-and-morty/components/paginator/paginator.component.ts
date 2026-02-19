@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { RamService } from '../../services/ram.service';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription, throttleTime } from 'rxjs';
 
 @Component({
   selector: 'app-paginator',
@@ -8,12 +8,15 @@ import { Subscription } from 'rxjs';
   templateUrl: './paginator.component.html',
   styleUrl: './paginator.component.scss',
 })
-export class PaginatorComponent implements OnInit {
+export class PaginatorComponent implements OnInit, OnDestroy {
+  @Input() isLoading = false;
+  
   public totalItems = 0;
   public pageSize = 20;
   public page = 1;
 
   private subs = new Subscription();
+  
 
   constructor(private _ramService: RamService) {}
 
@@ -31,6 +34,8 @@ export class PaginatorComponent implements OnInit {
         this.totalItems = size;
       }),
     );
+
+    
   }
 
   onPageChange(page: number): void {

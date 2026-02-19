@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, combineLatest, map, Observable, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, debounceTime, map, Observable, of, switchMap, tap } from 'rxjs';
 import { RamResponse } from '../models/ram.interface';
 
 type Resource = 'character' | 'episodes' | 'locations';
@@ -49,7 +49,8 @@ export class RamService {
    * hace la petición correspondiente.
    */
   getCharactersCombined(): Observable<RamResponse | null> {
-    return combineLatest([this.page$, this.search$]).pipe(
+    return combineLatest([this.page$.pipe(debounceTime(500))
+      , this.search$]).pipe(
       tap(() => this.loadingSubject.next(true)),
       switchMap(([page, name]) =>
         this.getCharacters(page, name).pipe(

@@ -9,7 +9,10 @@
   </div>
   <div class="grid-content">
     <div class="action-bar">
-      <app-ram-input (item)="onSearch($event)" [isLoading]="isLoading"></app-ram-input>
+      <app-ram-input
+        (item)="onSearch($event)"
+        [isLoading]="isLoading"
+      ></app-ram-input>
       <div class="d-flex align-items-center justify-content-end gap-1">
         <span
           class=""
@@ -52,7 +55,7 @@
 
     <div class="row mt-1">
       <div class="col-12">
-        <app-paginator></app-paginator>
+        <app-paginator [isLoading]="isLoading"></app-paginator>
       </div>
     </div>
   </div>
