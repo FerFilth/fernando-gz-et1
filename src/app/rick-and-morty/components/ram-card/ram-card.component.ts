@@ -10,6 +10,7 @@ import { RamCharacter } from '../../models/ram.interface';
 export class RamCardComponent {
   @Input() character: RamCharacter | null = null;
   public hasLoaded = false;
+  public isFavorite = false;
 
   getImage()  {
     return this.character?.image;
@@ -18,5 +19,18 @@ export class RamCardComponent {
    onLoad() {
         this.hasLoaded = true;
     }
+
+  toggleFavorite() {
+    this.isFavorite = !this.isFavorite;
+  }
+
+  getIconStyle() {
+    return {
+      'font-variation-settings': this.isFavorite ? "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24" : "'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24",
+      'color': this.isFavorite ? '#ffc107' : '#6c757d',
+      'cursor': 'pointer',
+      'user-select': 'none'
+    };
+  }
 
 }

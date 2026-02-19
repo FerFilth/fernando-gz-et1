@@ -17,6 +17,15 @@
     />
   </div>
   <div class="card-body">
-    <h5 class="card-title text-center mb-0">{{ character?.name }}</h5>
+    <div class="d-flex justify-content-between align-items-center">
+      <h5 class="fs-6 mb-0">{{ character?.name }}</h5>
+      <span
+        class="material-symbols-outlined"
+        (click)="toggleFavorite()"
+        [ngStyle]="getIconStyle()"
+      >
+        star
+      </span>
+    </div>
   </div>
 </div>
