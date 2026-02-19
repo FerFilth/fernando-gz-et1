@@ -1,4 +1,7 @@
-<div class="d-flex justify-content-center" [class.loading]="isLoading">
+<div
+  class="d-flex justify-content-center align-items-center"
+  [class.loading]="isLoading"
+>
   <ngb-pagination
     [collectionSize]="totalItems"
     [(page)]="page"

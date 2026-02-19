@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ErrorComponent } from './pages/error/error.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
     path: '',
     redirectTo: 'rick-and-morty',
     pathMatch: 'full',
+  },
+  {
+    path: '**',
+    component: ErrorComponent,
   },
 ];
 

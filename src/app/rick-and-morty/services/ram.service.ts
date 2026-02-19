@@ -61,19 +61,9 @@ export class RamService {
    */
   getCharactersByIds(ids: number[]): Observable<RamCharacter[]> {
     if (ids.length === 0) return of([]);
-    if (ids.length === 1) {
-      return this.http
-        .get<RamCharacter>(
-          `https://rickandmortyapi.com/api/character/${ids[0]}`,
-        )
-        .pipe(
-          map((char) => [char]),
-          catchError(() => of([])),
-        );
-    }
     return this.http
       .get<RamCharacter[]>(
-        `https://rickandmortyapi.com/api/character/${ids.join(',')}`,
+        `https://rickandmortyapi.com/api/character/${[...ids].join(',')}`,
       )
       .pipe(catchError(() => of([])));
   }

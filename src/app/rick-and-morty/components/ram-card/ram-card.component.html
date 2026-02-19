@@ -9,6 +9,7 @@
         alt="Cargando..."
       />
       <img
+        (click)="openModal()"
         [src]="getImage()"
         [alt]="character?.name || 'Personaje'"
         (load)="onLoad()"
