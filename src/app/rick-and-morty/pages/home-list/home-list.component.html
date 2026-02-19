@@ -6,13 +6,18 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 mb-3">
       <app-ram-input (item)="getCharacters()"></app-ram-input>
     </div>
-    <div class="col-12 g-3 vh-100 overflow-auto">
-      <app-ram-grid [characters]="characters"></app-ram-grid>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="vh-100 overflow-auto px-2">
+        <app-ram-grid [characters]="characters"></app-ram-grid>
+      </div>
     </div>
-
+  </div>
+  <div class="row mt-3">
     <div class="col-12">
       <app-paginator></app-paginator>
     </div>

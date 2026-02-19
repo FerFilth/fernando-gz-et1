@@ -9,4 +9,14 @@ import { RamCharacter } from '../../models/ram.interface';
 })
 export class RamCardComponent {
   @Input() character: RamCharacter | null = null;
+  public hasLoaded = false;
+
+  getImage()  {
+    return this.character?.image;
+  }
+
+   onLoad() {
+        this.hasLoaded = true;
+    }
+
 }
