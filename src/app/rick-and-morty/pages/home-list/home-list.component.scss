@@ -1,3 +1,11 @@
+.grid-home-page{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 16px;
+}
+
+
 .favorite-button {
   transition: all 0.2s ease;
 

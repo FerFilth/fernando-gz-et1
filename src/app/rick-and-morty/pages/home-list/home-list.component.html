@@ -1,5 +1,5 @@
-<div class="container mt-2 mb-3">
-  <div class="row mt-md-4">
+<div class="container grid-home-page">
+  <div class="row">
     <div class="col-12 col-md-6">
       <h1 class="mb-3">Wubba lubba dub dub!</h1>
       <p class="mb-3">Base de datos de personajes de Rick y Morty</p>
@@ -20,13 +20,11 @@
         [class.is-active]="showOnlyFavorites"
         (click)="toggleFavorite()"
       >
-        <span class="material-symbols-outlined favorite-icon">
-          star
-        </span>
+        <span class="material-symbols-outlined favorite-icon"> star </span>
       </button>
     </div>
     <div class="row">
-      <div class="col-12">
+      <div class="col-12" style="padding: 5px">
         <div class="vh-100 overflow-auto px-2">
           <div
             *ngIf="showOnlyFavorites && characters.length === 0"
