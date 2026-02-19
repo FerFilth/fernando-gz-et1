@@ -7,6 +7,9 @@
   </div>
   <div class="row">
     <div class="col-12">
+      <app-ram-input (item)="getCharacters()"></app-ram-input>
+    </div>
+    <div class="col-12 g-3 vh-100 overflow-auto">
       <app-ram-grid [characters]="characters"></app-ram-grid>
     </div>
   </div>

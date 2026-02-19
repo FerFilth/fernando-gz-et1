@@ -16,10 +16,11 @@ export class HomeListComponent implements OnInit {
   ngOnInit(): void {
     this.getCharacters();
   }
+
+  
   getCharacters() {
     this._ramService.getCharacters().subscribe((data: RamResponse[] | null) => {
       this.characters = data;
-      localStorage.setItem('characters', JSON.stringify(this.characters));
     });
   }
 }

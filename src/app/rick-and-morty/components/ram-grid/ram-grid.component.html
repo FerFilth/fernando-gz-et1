@@ -1,4 +1,8 @@
-<div
-  class="col-md-6 col-lg-4 cards"
-  *ngFor="let item of characters; let i = index"
-></div>
+<ng-container *ngIf="characters && characters.length > 0; else elseTemplate">
+  <ng-container *ngFor="let item of characters">
+    <!-- <app-ram-card [character]="item"></app-ram-card> -->
+  </ng-container>
+</ng-container>
+<ng-template #elseTemplate>
+  <p class="text-center">No hay personajes disponibles</p>
+</ng-template>
