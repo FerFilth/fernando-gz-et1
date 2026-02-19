@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, combineLatest, debounceTime, map, Observable, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, debounceTime, delay, map, Observable, of, switchMap, tap } from 'rxjs';
 import { RamCharacter, RamResponse } from '../models/ram.interface';
 
 type Resource = 'character' | 'episodes' | 'locations';
@@ -49,7 +49,10 @@ export class RamService {
       .get<RamResponse | null>(
         `https://rickandmortyapi.com/api/${this.resource}?page=${page}&name=${name}`,
       )
-      .pipe(catchError(() => of(null)));
+      .pipe(
+        delay(3000),
+        catchError(() => of(null)),
+      );
   }
 
   /**
