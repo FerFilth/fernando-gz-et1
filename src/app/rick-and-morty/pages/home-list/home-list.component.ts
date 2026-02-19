@@ -12,7 +12,6 @@ import { Subscription } from 'rxjs';
 export class HomeListComponent implements OnInit {
   public characters: RamCharacter[] = [];
   public info: Info | null = null;
-  public currentPage = 1;
   private sub!: Subscription;
   constructor(private _ramService: RamService) {}
 
@@ -22,7 +21,7 @@ export class HomeListComponent implements OnInit {
 
   getCharacters() {
     this.sub = this._ramService
-      .getCharacters()
+      .getCharactersCombined()
       .subscribe((data: RamResponse | null) => {
         if (data) {
           this.characters = data.results;
@@ -31,20 +30,11 @@ export class HomeListComponent implements OnInit {
           this.characters = [];
           this.info = null;
         }
-        this._ramService.page$.subscribe((page) => (this.currentPage = page));
       });
   }
 
-  nextPage(): void {
-    if (this.info?.next) {
-      this._ramService.setPage(this.currentPage + 1);
-    }
-  }
-
-  prevPage(): void {
-    if (this.info?.prev) {
-      this._ramService.setPage(this.currentPage - 1);
-    }
+  onSearch(searchTerm: string) {
+    this._ramService.setSearch(searchTerm);
   }
 
   ngOnDestroy(): void {
