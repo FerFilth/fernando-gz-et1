@@ -1,0 +1,91 @@
+.modal-body {
+  padding: 10px;
+  .close {
+    border: none;
+    border-radius: 10px;
+    background: #ffe1e1;
+    color: #c73a3a;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    &:hover {
+      background: #c73a3a;
+      color: #ffe1e1;
+    }
+  }
+  
+  img {
+    border-radius: 4px;
+  }
+  .character-name {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  .badge-grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto auto auto;
+    justify-content: center;
+    justify-items: center;
+   
+    .badge-custom {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-items: center;
+      width: fit-content;
+      max-width: 100%;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      overflow: hidden;
+      margin: 3px;
+      cursor: help;
+      .b-label {
+        font-weight: bold;
+        letter-spacing: normal;
+        flex-shrink: 0;
+      }
+      .b-value {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        min-width: 0;
+      }
+    }
+    .badge-full {
+      grid-column: span 2;
+    }
+    .left {
+      justify-self: end;
+    }
+    .right {
+      justify-self: start;
+    }
+    .badge-blue {
+      background-color: #ccefff;
+    }
+    .badge-purple {
+      background-color: #ccd5ff;
+    }
+    .badge-green {
+      background-color: #ccffda;
+    }
+    .badge-yellow {
+      background-color: #f7f6ce;
+    }
+    .badge-orange {
+      background-color: #fae9d2;
+    }
+  }
+
+}  
+
+

@@ -1,46 +1,47 @@
 <div class="modal-body">
-  <div class="d-flex justify-content-end">
-    <button
-      type="button"
-      class="btn-close"
-      aria-label="Close"
-      (click)="activeModal.dismiss()"
-    ></button>
+  <div class="d-flex justify-content-end" style="margin-bottom: 10px">
+    <button type="button" class="close" (click)="activeModal.dismiss()">
+      CERRAR
+      <span class="material-symbols-outlined"> close </span>
+    </button>
   </div>
 
   <div class="row">
     <div class="col-md-12">
-      <img
-        [src]="character.image"
-        [alt]="character.name"
-        class="img-fluid rounded shadow"
-      />
+      <img [src]="character.image" [alt]="character.name" class="img-fluid" />
     </div>
     <div class="col-12">
-      <h4 class="modal-title text-center">{{ character.name }}</h4>
+      <div class="character-name text-center">{{ character.name }}</div>
     </div>
     <div class="col-md-12">
-      <div class="mb-3">
-        <h6 class="text-muted mb-1">Estado</h6>
-        <p class="mb-0">{{ character.status }}</p>
-      </div>
+      <div class="badge-grid">
+        <div class="badge-custom badge-blue left" [title]="character.status">
+          <span class="b-label"> Estado: </span>
+          <span class="b-value">{{ character.status || '' }}</span>
+        </div>
+        <div class="badge-custom badge-purple right" [title]="character.gender">
+          <span class="b-label">Genero:</span>
+          <span class="b-value">{{ character.gender || '' }}</span>
+        </div>
 
-      <div class="mb-3">
-        <h6 class="text-muted mb-1">Genero</h6>
-        <p class="mb-0">{{ character.gender }}</p>
-      </div>
-
-      <div class="mb-3">
-        <h6 class="text-muted mb-1">Especie</h6>
-        <p class="mb-0">{{ character.species }}</p>
-      </div>
-      <div class="mb-3">
-        <h6 class="text-muted mb-1">Origen</h6>
-        <p class="mb-0">{{ character.origin.name }}</p>
-      </div>
-      <div class="mb-3">
-        <h6 class="text-muted mb-1">Ubicación</h6>
-        <p class="mb-0">{{ character.location.name }}</p>
+        <div class="badge-custom badge-green left" [title]="character.species">
+          <span class="b-label">Especie:</span>
+          <span class="b-value">{{ character.species || '' }}</span>
+        </div>
+        <div
+          class="badge-custom badge-yellow right"
+          [title]="character.origin.name"
+        >
+          <span class="b-label">Origen:</span>
+          <span class="b-value">{{ character.origin.name || '' }}</span>
+        </div>
+        <div
+          class="badge-custom badge-orange badge-full"
+          [title]="character.location.name"
+        >
+          <span class="b-label">Ubicación:</span>
+          <span class="b-value">{{ character.location.name || '' }}</span>
+        </div>
       </div>
     </div>
   </div>
