@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RamService } from '../../services/ram.service';
 import { Info, RamCharacter, RamResponse } from '../../models/ram.interface';
 import { Subscription } from 'rxjs';
@@ -9,13 +9,16 @@ import { Subscription } from 'rxjs';
   templateUrl: './home-list.component.html',
   styleUrl: './home-list.component.scss',
 })
-export class HomeListComponent implements OnInit {
+export class HomeListComponent implements OnInit, OnDestroy {
   public characters: RamCharacter[] = [];
   private allCharacters: RamCharacter[] = [];
+
   public info: Info | null = null;
+  public showOnlyFavorites = false;
+  public isLoading = false;
   private sub!: Subscription;
   private favoritesSub!: Subscription;
-  public showOnlyFavorites = false;
+  private loadingSub!: Subscription;
   private favoriteIds: Set<number> = new Set();
   
   constructor(private _ramService: RamService) {}
@@ -23,6 +26,7 @@ export class HomeListComponent implements OnInit {
   ngOnInit(): void {
     this.getCharacters();
     this.subscribeFavorites();
+    this.subscribeLoading();
   }
 
   getCharacters() {
@@ -45,6 +49,12 @@ export class HomeListComponent implements OnInit {
     this.favoritesSub = this._ramService.favorites$.subscribe(favorites => {
       this.favoriteIds = favorites;
       this.applyFilter();
+    });
+  }
+
+  subscribeLoading() {
+    this.loadingSub = this._ramService.loading$.subscribe(loading => {
+      this.isLoading = loading;
     });
   }
 
@@ -80,5 +90,6 @@ export class HomeListComponent implements OnInit {
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
     this.favoritesSub?.unsubscribe();
+    this.loadingSub?.unsubscribe();
   }
 }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { RickAndMortyRoutingModule } from './rick-and-morty-routing.module';
 import { HomeListComponent } from './pages/home-list/home-list.component';
@@ -19,6 +20,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RamInputComponent,
     PaginatorComponent,
   ],
-  imports: [CommonModule, RickAndMortyRoutingModule, NgbModule],
+  imports: [CommonModule, RickAndMortyRoutingModule, NgbModule, ReactiveFormsModule],
 })
 export class RickAndMortyModule {}

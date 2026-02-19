@@ -19,9 +19,11 @@ export class RamService {
   private pageSubject = new BehaviorSubject<number>(1);
   private searchSubject = new BehaviorSubject<string>('');
   private collectionSizeSubject = new BehaviorSubject<number>(0);
+  private loadingSubject = new BehaviorSubject<boolean>(false);
   public page$ = this.pageSubject.asObservable();
   public search$ = this.searchSubject.asObservable();
   public collectionSize$ = this.collectionSizeSubject.asObservable();
+  public loading$ = this.loadingSubject.asObservable();
 
   private readonly FAVORITES_KEY = 'ram-favorites';
   private favoritesSubject = new BehaviorSubject<Set<number>>(
@@ -48,6 +50,7 @@ export class RamService {
    */
   getCharactersCombined(): Observable<RamResponse | null> {
     return combineLatest([this.page$, this.search$]).pipe(
+      tap(() => this.loadingSubject.next(true)),
       switchMap(([page, name]) =>
         this.getCharacters(page, name).pipe(
           tap((response) => {
@@ -56,7 +59,12 @@ export class RamService {
             } else {
               this.collectionSizeSubject.next(0);
             }
+            this.loadingSubject.next(false);
           }),
+          catchError((error) => {
+            this.loadingSubject.next(false);
+            return of(null);
+          })
         ),
       ),
     );
