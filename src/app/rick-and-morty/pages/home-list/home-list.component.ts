@@ -11,21 +11,17 @@ import { Subscription } from 'rxjs';
 })
 export class HomeListComponent implements OnInit, OnDestroy {
   public characters: RamCharacter[] = [];
-  private allCharacters: RamCharacter[] = [];
-
   public info: Info | null = null;
   public showOnlyFavorites = false;
   public isLoading = false;
+
   private sub!: Subscription;
-  private favoritesSub!: Subscription;
   private loadingSub!: Subscription;
-  private favoriteIds: Set<number> = new Set();
-  
+
   constructor(private _ramService: RamService) {}
 
   ngOnInit(): void {
     this.getCharacters();
-    this.subscribeFavorites();
     this.subscribeLoading();
   }
 
@@ -34,43 +30,24 @@ export class HomeListComponent implements OnInit, OnDestroy {
       .getCharactersCombined()
       .subscribe((data: RamResponse | null) => {
         if (data) {
-          this.allCharacters = data.results;
+          this.characters = data.results;
           this.info = data.info;
-          this.applyFilter();
         } else {
-          this.allCharacters = [];
           this.characters = [];
           this.info = null;
         }
       });
   }
 
-  subscribeFavorites() {
-    this.favoritesSub = this._ramService.favorites$.subscribe(favorites => {
-      this.favoriteIds = favorites;
-      this.applyFilter();
-    });
-  }
-
   subscribeLoading() {
-    this.loadingSub = this._ramService.loading$.subscribe(loading => {
+    this.loadingSub = this._ramService.loading$.subscribe((loading) => {
       this.isLoading = loading;
     });
   }
 
-  applyFilter() {
-    if (this.showOnlyFavorites) {
-      this.characters = this.allCharacters.filter(char => 
-        this.favoriteIds.has(char.id)
-      );
-    } else {
-      this.characters = this.allCharacters;
-    }
-  }
-
   toggleFavorite() {
     this.showOnlyFavorites = !this.showOnlyFavorites;
-    this.applyFilter();
+    this._ramService.setFavoriteMode(this.showOnlyFavorites);
   }
 
   getIconStyle() {
@@ -83,13 +60,13 @@ export class HomeListComponent implements OnInit, OnDestroy {
       'user-select': 'none',
     };
   }
+
   onSearch(searchTerm: string) {
     this._ramService.setSearch(searchTerm);
   }
 
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
-    this.favoritesSub?.unsubscribe();
     this.loadingSub?.unsubscribe();
   }
 }

@@ -21,14 +21,14 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   constructor(private _ramService: RamService) {}
 
   ngOnInit(): void {
-    // Escuchar cambios en la página desde el servicio
+    // escuchar cambios en la página desde el servicio
     this.subs.add(
       this._ramService.page$.subscribe((page) => {
         this.page = page;
       }),
     );
 
-    // Escuchar el tamaño total de la colección
+    // escuchar el tamaño total de la colección
     this.subs.add(
       this._ramService.collectionSize$.subscribe((size) => {
         this.totalItems = size;
