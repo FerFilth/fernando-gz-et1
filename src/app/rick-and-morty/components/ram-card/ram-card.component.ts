@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Result } from '../../models/ram.interface';
+import { RamCharacter } from '../../models/ram.interface';
 
 @Component({
   selector: 'app-ram-card',
@@ -8,5 +8,5 @@ import { Result } from '../../models/ram.interface';
   styleUrl: './ram-card.component.scss',
 })
 export class RamCardComponent {
-  @Input() character: Result | null = null;
+  @Input() character: RamCharacter | null = null;
 }

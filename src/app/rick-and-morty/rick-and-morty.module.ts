@@ -7,6 +7,8 @@ import { RamCardComponent } from './components/ram-card/ram-card.component';
 import { RamGridComponent } from './components/ram-grid/ram-grid.component';
 import { RamModalComponent } from './components/ram-modal/ram-modal.component';
 import { RamInputComponent } from './components/ram-input/ram-input.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,8 @@ import { RamInputComponent } from './components/ram-input/ram-input.component';
     HomeListComponent,
     RamGridComponent,
     RamInputComponent,
+    PaginatorComponent,
   ],
-  imports: [CommonModule, RickAndMortyRoutingModule],
+  imports: [CommonModule, RickAndMortyRoutingModule, NgbModule],
 })
 export class RickAndMortyModule {}

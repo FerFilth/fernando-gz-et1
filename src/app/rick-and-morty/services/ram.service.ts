@@ -1,9 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, combineLatest, Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, map, Observable, of, switchMap, tap } from 'rxjs';
 import { RamResponse } from '../models/ram.interface';
 
 type Resource = 'character' | 'episodes' | 'locations';
+
+export interface Paginator  {
+  collectionSize: number;
+  pageSize: number;
+  page: number;
+}
 @Injectable({
   providedIn: 'root',
 })
@@ -12,9 +18,10 @@ export class RamService {
 
   private pageSubject = new BehaviorSubject<number>(1);
   private searchSubject = new BehaviorSubject<string>('');
-
-  page$ = this.pageSubject.asObservable();
-  search$ = this.searchSubject.asObservable();
+  private collectionSizeSubject = new BehaviorSubject<number>(0);
+  public page$ = this.pageSubject.asObservable();
+  public search$ = this.searchSubject.asObservable();
+  public collectionSize$ = this.collectionSizeSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -23,9 +30,9 @@ export class RamService {
     name: string = '',
   ): Observable<RamResponse | null> {
     return this.http
-      .get<
-        RamResponse | null
-      >(`https://rickandmortyapi.com/api/${this.resource}?page=${page}&name=${name}`)
+      .get<RamResponse | null>(
+        `https://rickandmortyapi.com/api/${this.resource}?page=${page}&name=${name}`,
+      )
       .pipe(catchError(() => of(null)));
   }
 
@@ -35,7 +42,15 @@ export class RamService {
    */
   getCharactersCombined(): Observable<RamResponse | null> {
     return combineLatest([this.page$, this.search$]).pipe(
-      switchMap(([page, name]) => this.getCharacters(page, name)),
+      switchMap(([page, name]) =>
+        this.getCharacters(page, name).pipe(tap((response) => {
+          if (response && response.info) {
+            this.collectionSizeSubject.next(response.info.count);
+          } else {
+            this.collectionSizeSubject.next(0);
+          }
+        })),
+      ),
     );
   }
 

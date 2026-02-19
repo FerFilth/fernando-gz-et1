@@ -1,6 +1,6 @@
 export interface RamResponse {
   info: Info;
-  results: Result[];
+  results: RamCharacter[];
 }
 
 export interface Info {
@@ -10,7 +10,7 @@ export interface Info {
   prev: null;
 }
 
-export interface Result {
+export interface RamCharacter {
   id: number;
   name: string;
   status: Status;
