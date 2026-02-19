@@ -19,8 +19,8 @@ export class HomeListComponent implements OnInit {
 
   
   getCharacters() {
-    this._ramService.getCharacters().subscribe((data: RamResponse[] | null) => {
-      this.characters = data;
+    this._ramService.getCharacters().subscribe((data: RamResponse| null) => {
+     // this.characters = data?.results;
     });
   }
 }
