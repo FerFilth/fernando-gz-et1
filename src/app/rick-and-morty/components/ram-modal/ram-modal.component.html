@@ -1,1 +1,47 @@
-<p>ram-modal works!</p>
+<div class="modal-body">
+  <div class="d-flex justify-content-end">
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="activeModal.dismiss()"
+    ></button>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <img
+        [src]="character.image"
+        [alt]="character.name"
+        class="img-fluid rounded shadow"
+      />
+    </div>
+    <div class="col-12">
+      <h4 class="modal-title text-center">{{ character.name }}</h4>
+    </div>
+    <div class="col-md-12">
+      <div class="mb-3">
+        <h6 class="text-muted mb-1">Estado</h6>
+        <p class="mb-0">{{ character.status }}</p>
+      </div>
+
+      <div class="mb-3">
+        <h6 class="text-muted mb-1">Genero</h6>
+        <p class="mb-0">{{ character.gender }}</p>
+      </div>
+
+      <div class="mb-3">
+        <h6 class="text-muted mb-1">Especie</h6>
+        <p class="mb-0">{{ character.species }}</p>
+      </div>
+      <div class="mb-3">
+        <h6 class="text-muted mb-1">Origen</h6>
+        <p class="mb-0">{{ character.origin.name }}</p>
+      </div>
+      <div class="mb-3">
+        <h6 class="text-muted mb-1">Ubicación</h6>
+        <p class="mb-0">{{ character.location.name }}</p>
+      </div>
+    </div>
+  </div>
+</div>
