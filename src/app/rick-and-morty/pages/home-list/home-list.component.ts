@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { RamService } from '../../services/ram.service';
 import { Info, RamCharacter, RamResponse } from '../../models/ram.interface';
 import { Subscription } from 'rxjs';
@@ -18,7 +18,7 @@ export class HomeListComponent implements OnInit, OnDestroy {
   private sub!: Subscription;
   private loadingSub!: Subscription;
 
-  constructor(private _ramService: RamService) {}
+  constructor(private _ramService: RamService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.getCharacters();
@@ -30,11 +30,20 @@ export class HomeListComponent implements OnInit, OnDestroy {
       .getCharactersCombined()
       .subscribe((data: RamResponse | null) => {
         if (data) {
-          this.characters = data.results;
-          this.info = data.info;
+          this.characters = structuredClone(data.results);
+          this.info = structuredClone(data.info);
+          console.log('Characters updated:', this.characters);
         } else {
-          this.characters = [];
-          this.info = null;
+          console.log('No data received');
+          this.characters = structuredClone([]);
+          this.info = structuredClone(null);
+        }
+        // Forzar detección 
+        try {
+          this.cdr.detectChanges();
+        } catch (e) {
+          
+          console.warn('detectChanges falló:', e);
         }
       });
   }
