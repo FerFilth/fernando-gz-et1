@@ -1,0 +1,32 @@
+<div class="card h-100 shadow-sm">
+  <div class="card-body">
+    <div class="image-ram">
+      <img
+        *ngIf="!hasLoaded"
+        src="../../../../assets/svg/loader.svg"
+        class="position-absolute top-50 start-50 translate-middle"
+        style="width: 50px; height: 50px"
+        alt="Cargando..."
+      />
+      <img
+        (click)="openModal()"
+        [src]="getImage()"
+        [alt]="character?.name || 'Personaje'"
+        (load)="onLoad()"
+        [ngStyle]="{ display: hasLoaded ? '' : 'none' }"
+        class="position-absolute top-0 start-0 w-100 h-100"
+        style="object-fit: cover"
+      />
+    </div>
+    <div class="d-flex justify-content-between align-items-center mt-2">
+      <h5 class="fs-6 mb-0" (click)="openModal()">{{ character?.name }}</h5>
+      <span
+        class="material-symbols-outlined"
+        (click)="toggleFavorite()"
+        [ngStyle]="getIconStyle()"
+      >
+        star
+      </span>
+    </div>
+  </div>
+</div>

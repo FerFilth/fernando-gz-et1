@@ -1,0 +1,20 @@
+<div class="input-group" [class.loading]="isLoading">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">
+      <span *ngIf="!isLoading" class="material-symbols-outlined">search</span>
+      <span
+        *ngIf="isLoading"
+        class="spinner-border spinner-border-sm"
+        role="status"
+        aria-hidden="true"
+      ></span>
+    </span>
+  </div>
+  <input
+    type="text"
+    class="form-control w-100"
+    id="searchInput"
+    [placeholder]="isLoading ? 'Buscando...' : 'Busca un personaje'"
+    [formControl]="searchControl"
+  />
+</div>

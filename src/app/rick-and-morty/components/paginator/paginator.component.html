@@ -1,0 +1,16 @@
+<div
+  class="d-flex justify-content-center align-items-center"
+  [class.loading]="isLoading"
+>
+  <ngb-pagination
+    [collectionSize]="totalItems"
+    [(page)]="page"
+    [pageSize]="pageSize"
+    [maxSize]="4"
+    [rotate]="true"
+    [disabled]="isLoading"
+    aria-label="Default pagination"
+    (pageChange)="onPageChange($event)"
+  >
+  </ngb-pagination>
+</div>

@@ -1,0 +1,48 @@
+<div class="modal-body">
+  <div class="d-flex justify-content-end" style="margin-bottom: 10px">
+    <button type="button" class="close" (click)="activeModal.dismiss()">
+      CERRAR
+      <span class="material-symbols-outlined"> close </span>
+    </button>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <img [src]="character.image" [alt]="character.name" class="img-fluid" />
+    </div>
+    <div class="col-12">
+      <div class="character-name text-center">{{ character.name }}</div>
+    </div>
+    <div class="col-md-12">
+      <div class="badge-grid">
+        <div class="badge-custom badge-blue left" [title]="character.status">
+          <span class="b-label"> Estado: </span>
+          <span class="b-value">{{ character.status || '' }}</span>
+        </div>
+        <div class="badge-custom badge-purple right" [title]="character.gender">
+          <span class="b-label">Genero:</span>
+          <span class="b-value">{{ character.gender || '' }}</span>
+        </div>
+
+        <div class="badge-custom badge-green left" [title]="character.species">
+          <span class="b-label">Especie:</span>
+          <span class="b-value">{{ character.species || '' }}</span>
+        </div>
+        <div
+          class="badge-custom badge-yellow right"
+          [title]="character.origin.name"
+        >
+          <span class="b-label">Origen:</span>
+          <span class="b-value">{{ character.origin.name || '' }}</span>
+        </div>
+        <div
+          class="badge-custom badge-orange badge-full"
+          [title]="character.location.name"
+        >
+          <span class="b-label">Ubicación:</span>
+          <span class="b-value">{{ character.location.name || '' }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

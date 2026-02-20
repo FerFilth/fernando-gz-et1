@@ -1,0 +1,91 @@
+.grid-home-page{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 16px;
+    padding: 18px;
+    height: 100vh;
+    overflow: hidden;
+}
+.grid-content{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 16px;
+    overflow: hidden;
+    min-height: 0;
+    .action-bar{
+      display: flex;
+      height: 45px;
+      justify-content: space-between;
+      align-items: center;
+    }
+}
+
+.grid-scroll-container {
+    overflow-y: auto;
+    min-height: 0;
+}
+
+.favorite-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  .favorite-icon {
+    cursor: pointer;
+    user-select: none;
+    color: #6c757d;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    transition: all 0.2s ease;
+  }
+
+  // Cuando está activo
+  &.is-active {
+    .favorite-icon {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    
+    // Hover cuando está activo
+    &:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+      
+      .favorite-icon {
+        color: #e9d9a9;
+      }
+    }
+  }
+  
+  // Hover cuando NO está activo
+  &:not(.is-active):hover {
+    background-color: #e9ecef;
+    transform: scale(1.05);
+    
+    .favorite-icon {
+      color: #ffc107;
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  }
+}
+
+.favorite-button.favorite-active {
+  background-color: #0d6efd;
+  
+  .favorite-icon {
+    color: #fff;
+  }
+}
+
+.favorite-button.favorite-inactive {
+  background-color: #f8f9fa;
+  
+  .favorite-icon {
+    color: #6c757d;
+  }
+}

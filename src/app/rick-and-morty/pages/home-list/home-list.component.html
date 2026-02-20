@@ -1,0 +1,62 @@
+<div class="container grid-home-page">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="text-center mb-3">
+        {{ !showOnlyFavorites ? 'Wubba lubba dub dub!' : 'Mis favoritos' }}
+      </h1>
+      <p class="mb-3 text-center">
+        Base de datos de personajes de Rick y Morty
+      </p>
+    </div>
+  </div>
+  <div class="grid-content">
+    <div class="action-bar">
+      <app-ram-input
+        (item)="onSearch($event)"
+        [isLoading]="isLoading"
+      ></app-ram-input>
+      <div class="d-flex align-items-center justify-content-end gap-1">
+        <span
+          class=""
+          [style]="
+            'font-weight: 600;
+         '
+          "
+          >{{ showOnlyFavorites ? 'Home' : 'Mis favoritos' }}</span
+        >
+        <button
+          class="favorite-button"
+          [class.favorite-active]="showOnlyFavorites"
+          [class.favorite-inactive]="!showOnlyFavorites"
+          [class.is-active]="showOnlyFavorites"
+          (click)="toggleFavorite()"
+        >
+          <span class="material-symbols-outlined favorite-icon">
+            {{ showOnlyFavorites ? 'home' : 'star' }}
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <div class="row grid-scroll-container">
+      <div class="col-12">
+        <div
+          *ngIf="showOnlyFavorites && characters.length === 0"
+          class="alert alert-info text-center mt-4"
+        >
+          <span
+            class="material-symbols-outlined fs-1 d-block mb-2"
+            style="font-variation-settings: 'FILL' 0"
+            >star</span
+          >
+          <p class="mb-0">
+            No tienes personajes favoritos aún. ¡Empieza a marcar tus favoritos!
+          </p>
+        </div>
+        <app-ram-grid [characters]="characters"></app-ram-grid>
+      </div>
+    </div>
+
+    <app-paginator [isLoading]="isLoading"></app-paginator>
+  </div>
+</div>
