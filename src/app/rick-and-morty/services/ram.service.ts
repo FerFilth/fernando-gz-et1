@@ -182,6 +182,9 @@ export class RamService {
   setFavoriteMode(active: boolean) {
     this.favoriteModeSubject.next(active);
     this.pageSubject.next(1);
+    // Invalida el caché de favoritos al cambiar de modo
+    this.favoritesCacheKey = '';
+    this.favoritesCache = [];
   }
 
   //#region FAVORITOS
@@ -206,6 +209,10 @@ export class RamService {
     this.favoritesCacheKey = '';
     this.favoritesCache = [];
     this.saveFavorites(favorites);
+    // Si estamos en modo favoritos, resetea a la página 1 para evitar quedarse en una página vacía
+    if (this.favoriteModeSubject.value) {
+      this.pageSubject.next(1);
+    }
   }
 
   isFavorite(characterId: number): boolean {
