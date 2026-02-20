@@ -11,7 +11,7 @@
           filter: invert(50%) sepia(1) hue-rotate(200deg);
         "
       />
-      <!-- <img
+      <img
         (click)="openModal()"
         [src]="getImage()"
         [alt]="character?.name || 'Personaje'"
@@ -19,7 +19,7 @@
         [ngStyle]="{ display: hasLoaded ? '' : 'none' }"
         class="position-absolute top-0 start-0 w-100 h-100"
         style="object-fit: cover"
-      /> -->
+      />
     </div>
     <div class="d-flex justify-content-between align-items-center mt-2">
       <h5 class="fs-6 mb-0" (click)="openModal()">{{ character?.name }}</h5>
