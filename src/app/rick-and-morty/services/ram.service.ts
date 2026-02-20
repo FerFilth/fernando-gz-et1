@@ -49,10 +49,7 @@ export class RamService {
       .get<RamResponse | null>(
         `https://rickandmortyapi.com/api/${this.resource}?page=${page}&name=${name}`,
       )
-      .pipe(
-      
-        catchError(() => of(null)),
-      );
+      .pipe(catchError(() => of(null)));
   }
 
   /**
@@ -61,10 +58,20 @@ export class RamService {
    */
   getCharactersByIds(ids: number[]): Observable<RamCharacter[]> {
     if (ids.length === 0) return of([]);
+    if (ids.length === 1) {
+      return this.http
+        .get<RamCharacter>(
+          `https://rickandmortyapi.com/api/character/${ids[0]}`,
+        )
+        .pipe(
+          map((char) => [char]),
+          catchError(() => of([])),
+        );
+    }
     return this.http
-      .get<RamCharacter[]>(
-        `https://rickandmortyapi.com/api/character/${[...ids].join(',')}`,
-      )
+      .get<
+        RamCharacter[]
+      >(`https://rickandmortyapi.com/api/character/${ids.join(',')}`)
       .pipe(catchError(() => of([])));
   }
 
@@ -175,13 +182,16 @@ export class RamService {
   }
 
   setSearch(search: string) {
-    this.pageSubject.next(1);// cada busqueda resetea a la página 1
+    this.pageSubject.next(1); // cada busqueda resetea a la página 1
     this.searchSubject.next(search);
   }
 
   setFavoriteMode(active: boolean) {
     this.favoriteModeSubject.next(active);
     this.pageSubject.next(1);
+    // Invalida el caché de favoritos al cambiar de modo
+    this.favoritesCacheKey = '';
+    this.favoritesCache = [];
   }
 
   //#region FAVORITOS
@@ -206,6 +216,10 @@ export class RamService {
     this.favoritesCacheKey = '';
     this.favoritesCache = [];
     this.saveFavorites(favorites);
+    // Si estamos en modo favoritos, resetea a la página 1 para evitar quedarse en una página vacía
+    if (this.favoriteModeSubject.value) {
+      this.pageSubject.next(1);
+    }
   }
 
   isFavorite(characterId: number): boolean {
