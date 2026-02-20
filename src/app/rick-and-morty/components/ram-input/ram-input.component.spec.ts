@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SimpleChange } from '@angular/core';
-
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { RamInputComponent } from './ram-input.component';
 
 describe('RamInputComponent', () => {

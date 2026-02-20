@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 
@@ -6,18 +7,18 @@ import { HomeListComponent } from './home-list.component';
 import { RamService } from '../../services/ram.service';
 import { RamCharacter, RamResponse, Gender, Species, Status } from '../../models/ram.interface';
 
-@Component({ selector: 'app-ram-input', template: '' })
+@Component({ selector: 'app-ram-input', template: '' ,standalone: false})
 class MockRamInputComponent {
   @Output() item = new EventEmitter<string>();
   @Input() isLoading = false;
 }
 
-@Component({ selector: 'app-ram-grid', template: '' })
+@Component({ selector: 'app-ram-grid', template: '' ,standalone: false})
 class MockRamGridComponent {
   @Input() characters: RamCharacter[] | null = null;
 }
 
-@Component({ selector: 'app-paginator', template: '' })
+@Component({ selector: 'app-paginator', template: '' ,standalone: false})
 class MockPaginatorComponent {
   @Input() isLoading = false;
 }
@@ -49,12 +50,14 @@ describe('HomeListComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      declarations: [
-        HomeListComponent,
-        MockRamInputComponent,
-        MockRamGridComponent,
-        MockPaginatorComponent,
-      ],
+        declarations: [
+          HomeListComponent,
+          MockRamGridComponent,
+          MockPaginatorComponent,
+        ],
+        imports: [
+          MockRamInputComponent,
+        ],
       providers: [{ provide: RamService, useValue: ramServiceMock }],
     }).compileComponents();
 

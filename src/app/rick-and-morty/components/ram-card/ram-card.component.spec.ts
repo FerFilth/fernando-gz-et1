@@ -4,7 +4,7 @@ import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RamCardComponent } from './ram-card.component';
 import { RamService } from '../../services/ram.service';
 import { RamCharacter, Gender, Species, Status } from '../../models/ram.interface';
-
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 const mockCharacter: RamCharacter = {
   id: 1,
   name: 'Rick Sanchez',

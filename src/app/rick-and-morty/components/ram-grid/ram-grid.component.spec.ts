@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 
 import { RamGridComponent } from './ram-grid.component';
 import { RamCharacter, Gender, Species, Status } from '../../models/ram.interface';
-
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 @Component({ selector: 'app-ram-card', template: '<div class="mock-card">{{character?.name}}</div>' })
 class MockRamCardComponent {
   @Input() character: RamCharacter | null = null;

@@ -3,7 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { RamModalComponent } from './ram-modal.component';
 import { RamCharacter, Gender, Species, Status } from '../../models/ram.interface';
-
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 const mockCharacter: RamCharacter = {
   id: 1,
   name: 'Rick Sanchez',

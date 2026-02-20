@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { RamService } from './ram.service';
 import { RamCharacter, RamResponse, Gender, Species, Status } from '../models/ram.interface';
-
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 const mockCharacter: RamCharacter = {
   id: 1,
   name: 'Rick Sanchez',

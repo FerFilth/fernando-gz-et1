@@ -50,7 +50,7 @@ export class RamService {
         `https://rickandmortyapi.com/api/${this.resource}?page=${page}&name=${name}`,
       )
       .pipe(
-        delay(3000),
+      
         catchError(() => of(null)),
       );
   }

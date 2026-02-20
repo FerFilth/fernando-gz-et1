@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 
 import { PaginatorComponent } from './paginator.component';
 import { RamService } from '../../services/ram.service';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 describe('PaginatorComponent', () => {
   let component: PaginatorComponent;
